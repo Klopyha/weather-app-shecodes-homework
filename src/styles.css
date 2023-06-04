@@ -20,6 +20,13 @@ h1 {
   position: relative;
   top: -48px;
 }
+.c-f .active {
+  color: black;
+  cursor: default;
+}
+.c-f .active:hover {
+  text-decoration: none;
+}
 button {
   display: block;
   background-color: aliceblue;

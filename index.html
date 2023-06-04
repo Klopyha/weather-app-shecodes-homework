@@ -35,7 +35,7 @@
         <p id="timeNow">Chance of rain/current time</p>
         <span class="temperature" id="temperature">18</span>
         <span class="c-f">
-          <a href="#" id="celsius-link">°C</a> |
+          <a href="#" id="celsius-link" class="active">°C</a> |
           <a href="#" id="fahrenheit-link">°F</a>
         </span>
         <button>Current Location</button>
@@ -169,11 +169,15 @@
 
       function showTemperatureInC(event) {
         event.preventDefault();
+        showC.classList.add("active");
+        showF.classList.remove("active");
         let element = document.querySelector("#temperature");
         element.innerHTML = temperatureC;
       }
       function showTemperatureInF(event) {
         event.preventDefault();
+        showC.classList.remove("active");
+        showF.classList.add("active");
         let f = (temperatureC * 9) / 5 + 32;
         let element = document.querySelector("#temperature");
         element.innerHTML = Math.round(f);
@@ -188,6 +192,7 @@
 
       let cityForm = document.querySelector("#search-form");
       cityForm.addEventListener("search", changeh1);
+      search("Kyiv");
     </script>
   </body>
 </html>
