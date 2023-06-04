@@ -9,12 +9,16 @@ h1 {
   font-size: 3.5rem;
   font-weight: 400;
 }
-h2 {
+.temperature {
   font-family: "Space Grotesk", sans-serif;
   color: rgb(68, 70, 75);
   font-weight: 400;
   font-size: 5em;
   margin-bottom: 5rem;
+}
+.c-f {
+  position: relative;
+  top: -48px;
 }
 button {
   display: block;

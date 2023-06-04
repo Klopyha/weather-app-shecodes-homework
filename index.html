@@ -33,7 +33,11 @@
         </div>
         <h1>Kyiv, Ukraine</h1>
         <p id="timeNow">Chance of rain/current time</p>
-        <h2>18°C</h2>
+        <span class="temperature" id="temperature">18</span>
+        <span class="c-f">
+          <a href="#" id="celsius-link">°C</a> |
+          <a href="#" id="fahrenheit-link">°F</a>
+        </span>
         <button>Current Location</button>
         <div class="next-days">
           <div class="container text-center">
@@ -124,20 +128,20 @@
         axios.get(apiUrl).then(showTemperature);
         function showTemperature(response) {
           let temperature = Math.round(response.data.main.temp);
-          let tempOnPage = document.querySelector("h2");
-          tempOnPage.innerHTML = `${temperature}C`;
+          let tempOnPage = document.querySelector("#temperature");
+          tempOnPage.innerHTML = `${temperature}`;
+          temperatureC = Math.round(response.data.main.temp);
         }
       }
-      let cityForm = document.querySelector("#search-form");
-      cityForm.addEventListener("search", changeh1);
-      // temperatureNow = document.querySelector();
 
       function showNowWeather(response) {
+        temperatureC = response.data.main.temp;
         let h1 = document.querySelector("h1");
         h1.innerHTML = response.data.name;
-        let h2 = document.querySelector("h2");
+        let h2 = document.querySelector("#temperature");
         let temperature = Math.round(response.data.main.temp);
-        h2.innerHTML = `${temperature}°`;
+        temperatureC = Math.round(response.data.main.temp);
+        h2.innerHTML = `${temperature}`;
         let iconElement = document.querySelector("img#todayIcon.todayImg");
         iconElement.setAttribute(
           "src",
@@ -145,13 +149,14 @@
         );
       }
 
-      function retrievePosition(position) {
+      function retrievePosition(response) {
         let apiKey = "bd3bb6534458ba51b48c49f5155745b6";
         //let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
         axios.get(url).then(showNowWeather);
+        temperatureC = Math.round(response.data.main.temp);
       }
 
       function showCurrentPosition(event) {
@@ -161,6 +166,28 @@
 
       let tempButton = document.querySelector("button");
       tempButton.addEventListener("click", showCurrentPosition);
+
+      function showTemperatureInC(event) {
+        event.preventDefault();
+        let element = document.querySelector("#temperature");
+        element.innerHTML = temperatureC;
+      }
+      function showTemperatureInF(event) {
+        event.preventDefault();
+        let f = (temperatureC * 9) / 5 + 32;
+        let element = document.querySelector("#temperature");
+        element.innerHTML = Math.round(f);
+      }
+
+      let temperatureC = null;
+
+      let showC = document.querySelector("#celsius-link");
+      showC.addEventListener("click", showTemperatureInC);
+      let showF = document.querySelector("#fahrenheit-link");
+      showF.addEventListener("click", showTemperatureInF);
+
+      let cityForm = document.querySelector("#search-form");
+      cityForm.addEventListener("search", changeh1);
     </script>
   </body>
 </html>
