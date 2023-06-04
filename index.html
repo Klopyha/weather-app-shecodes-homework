@@ -95,7 +95,13 @@
       ];
       let day = days[now.getDay()];
       let hour = now.getHours();
+      if (hour < 10) {
+        hour = `0${min}`;
+      }
       let min = now.getMinutes();
+      if (min < 10) {
+        min = `0${min}`;
+      }
 
       let timeNow = document.querySelector("#timeNow");
       timeNow.innerHTML = `${day} ${hour}:${min}`;
