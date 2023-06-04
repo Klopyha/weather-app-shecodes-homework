@@ -71,13 +71,21 @@
             </div>
           </div>
         </div>
-        <img class="todayImg" src="images/sun.png" alt="sunny Weather" />
+        <img
+          class="todayImg"
+          src="images/sun.png"
+          alt="sunny Weather"
+          id="todayIcon"
+        />
         <span class="sourceCode">
           <a
             href="https://github.com/Klopyha/weather-app-shecodes-homework.git"
             target="_blank"
             >Open source code</a
           >
+          <!--
+            https://openweathermap.org/img/wn/10d@2x.png
+           -->
           by Klopyha
         </span>
       </div>
@@ -96,7 +104,7 @@
       let day = days[now.getDay()];
       let hour = now.getHours();
       if (hour < 10) {
-        hour = `0${min}`;
+        hour = `0${hour}`;
       }
       let min = now.getMinutes();
       if (min < 10) {
@@ -130,6 +138,11 @@
         let h2 = document.querySelector("h2");
         let temperature = Math.round(response.data.main.temp);
         h2.innerHTML = `${temperature}°`;
+        let iconElement = document.querySelector("#todayIcon");
+        iconElement.innerHTML.setAttribute(
+          "src",
+          "https://openweathermap.org/img/wn/10d@2x.png"
+        );
       }
 
       function retrievePosition(position) {
